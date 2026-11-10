@@ -1,0 +1,7 @@
+{
+  "name": "christmas-hangman",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
