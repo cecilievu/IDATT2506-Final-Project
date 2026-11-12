@@ -1,0 +1,33 @@
+{
+    "en": {
+        "title": "Christmas Hangman",
+        "subtitle": "Get ready for å festive game of Hangman!",
+        "play": "Play",
+        "playAgain": "Play again",
+        "back": "Back",
+        "startOver": "Start over",
+        "wrongGuesses": "Wrong guesses",
+        "win": "Congratulations! You've guessed the word 🌟",
+        "lose": "Game over 😔 The word was",
+        "chooseLanguage": "Choose your language",
+        "instructions": "How to play",
+        "instructionsText": "Guess the hidden Christmas word, one letter at a time.",
+        "close": "Got it!"
+    },
+
+    "no": {
+        "title": "Julehangman",
+        "subtitle": "Gjør deg klar for en julete Hangman!",
+        "play": "Spill",
+        "playAgain": "Spill igjen",
+        "back": "Tilbake",
+        "startOver": "Start på nytt",
+        "wrongGuesses": "Feil",
+        "win": "Gratulerer! Du gjettet riktig ord 🌟",
+        "lose": "Game over 😔 Ordet var",
+        "chooseLanguage": "Velg språk",
+        "instructions": "Slik spiller du",
+        "instructionsText": "Gjett det skjulte juleordet, en bokstav om gangen.",
+        "close": "Skjønner!"
+    }
+}

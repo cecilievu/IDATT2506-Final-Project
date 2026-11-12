@@ -3,7 +3,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import { Route } from 'react-router-dom';
 import { useState } from 'react';
 
-import Home from './pages/Home';
+import Game from './pages/Game';
 import StartPage from './pages/StartPage';
 
 /* Core CSS required for Ionic components to work properly */
@@ -35,12 +35,14 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import './theme/background.css'
 import React from 'react';
 
 setupIonicReact();
 
 const App: React.FC = () => {
   const [language, setLanguage] = useState<'en' | 'no'>('en');
+  const [hasSeenInstructions, setHasSeenInstructions] = useState(false);
 
   return (
     <IonApp>
@@ -52,13 +54,15 @@ const App: React.FC = () => {
               <StartPage
               language={language}
               setLanguage={setLanguage}
+              hasSeenInstructions={hasSeenInstructions}
+              setHasSeenInstructions={setHasSeenInstructions}
               />
             }
           />
 
           <Route
           path="/game"
-          element={<Home language={language} />}
+          element={<Game language={language} />}
         />
       </IonRouterOutlet>
     </IonReactRouter>

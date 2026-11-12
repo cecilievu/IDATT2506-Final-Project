@@ -1,0 +1,36 @@
+/* fonts */
+@font-face {
+    font-family: 'Fredoka';
+    src: url('/fonts/Fredoka.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    src: url('/fonts/Quicksand.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 500 700;
+    font-display: swap;
+}
+
+:root {
+    --ion-font-family: 'Quicksand', sans-serif;
+}
+
+h1, h2, ion-title {
+    font-family: 'Fredoka', sans-serif;
+}
+
+/* felles bakgrunn for alle sider */
+ion-content {
+    --background: 
+    linear-gradient(
+        rgba(255, 255, 255, 0.5),
+        rgba(255, 255, 255, 0.5)
+    ),
+    url('/images/background.png')
+    center / cover no-repeat;
+}
+
