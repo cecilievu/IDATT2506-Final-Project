@@ -1,0 +1,17 @@
+/* pepperkakemann i startpage */
+.start-gingerbread {
+    display: block;
+    width: 150px;
+    height: auto;
+    margin: 20px auto;
+    object-fit: contain;
+}
+
+/* lys beige bakgrunn bak tekst/bilder */
+.start-content {
+  background: rgba(252, 248, 234, 0.88);
+  border-radius: 10px;
+  border: 3px dotted #6e3c19;
+  padding: 10px 10px;
+  text-align: center;
+}

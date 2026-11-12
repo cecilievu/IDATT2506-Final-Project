@@ -1,4 +1,5 @@
 import { IonButton } from '@ionic/react';
+import './Keyboard.css'
 
 interface KeyboardProps {
   onGuess: (letter: string) => void;

@@ -1,3 +1,4 @@
+import './WordDisplay.css'
 
 interface WordDisplayProps {
   word: string;

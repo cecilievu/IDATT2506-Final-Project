@@ -1,6 +1,6 @@
 import { IonButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonIcon } from '@ionic/react';
 import { informationCircleOutline } from 'ionicons/icons';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './Game.css';
 
 import Keyboard from '../components/Keyboard';
@@ -10,17 +10,32 @@ import InstructionsModal from '../components/InstructionsModal';
 import words from '../data/words.json';
 import translation from '../data/translation.json';
 
-interface HomeProps {
-  language: 'en' | 'no'
+interface GameProps {
+  language: 'en' | 'no';
+  word: string;
+  setWord: React.Dispatch<React.SetStateAction<string>>;
+  guessedLetters: string[];
+  setGuessedLetters: React.Dispatch<React.SetStateAction<string[]>>;
+  wrongGuesses: number;
+  setWrongGuesses: React.Dispatch<React.SetStateAction<number>>;
+  streak: number;
+  setStreak: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const MAX_WRONG_GUESSES = 6;
 
-const Home = ({ language }: HomeProps) => {
+const Game = ({
+  language,
+  word,
+  setWord,
+  guessedLetters,
+  setGuessedLetters,
+  wrongGuesses,
+  setWrongGuesses,
+  streak,
+  setStreak
+}: GameProps) => {
 
-  const [word, setWord] = useState('');
-  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
-  const [wrongGuesses, setWrongGuesses] = useState(0);
   const [showInstructions, setShowInstructions] = useState(false);
   const gameReady = word !== '';
 
@@ -34,18 +49,29 @@ const Home = ({ language }: HomeProps) => {
     setWrongGuesses(0);
   };
 
-  useEffect(() => {
-    startGame();
-  }, [language]);
-
   const guessLetter = (letter: string) => {
     if (gameOver || guessedLetters.includes(letter)) {
       return;
     }
 
-    setGuessedLetters(previous => [...previous, letter]);
+    const updatedGuesses = [...guessedLetters, letter];
+    setGuessedLetters(updatedGuesses);
+
     if (!word.includes(letter)) {
-      setWrongGuesses(previous => previous + 1);
+      const newWrongGuesses = wrongGuesses + 1;
+      setWrongGuesses(newWrongGuesses);
+
+      if (newWrongGuesses >= MAX_WRONG_GUESSES) {
+        setStreak(0);
+      }
+    } else {
+      const wonNow = word.split('').every(
+        char => char === ' ' || updatedGuesses.includes(char)
+      );
+
+      if (wonNow) {
+        setStreak(previous => previous + 1);
+      }
     }
   };
 
@@ -53,16 +79,16 @@ const Home = ({ language }: HomeProps) => {
   const hasLost = wrongGuesses >= MAX_WRONG_GUESSES;
   const gameOver = hasWon || hasLost;
 
-
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
 
           <IonButtons slot="start">
-            <IonButton 
-            routerLink="/"
-            routerDirection='back'
+            <IonButton
+              className="header-button"
+              routerLink="/"
+              routerDirection='back'
             >
               {text.back}
             </IonButton>
@@ -72,6 +98,7 @@ const Home = ({ language }: HomeProps) => {
 
           <IonButtons slot="end">
             <IonButton
+              className="header-button"
               aria-label={text.instructions}
               onClick={() => setShowInstructions(true)}
             >
@@ -83,22 +110,31 @@ const Home = ({ language }: HomeProps) => {
 
       <IonContent className="ion-padding">
 
-        {gameReady && (
-          <GingerbreadMan
-            wrongGuesses={wrongGuesses}
-            hasWon={hasWon}
-          />
-        )}
+        <div className="game-content">
+          {gameReady && (
+            <GingerbreadMan
+              wrongGuesses={wrongGuesses}
+              hasWon={hasWon}
+            />
+          )}
+        </div>
 
-        {gameReady && (
-          <WordDisplay word={word} guessedLetters={guessedLetters} />
-        )}
+        <div className="game-content1">
+          {gameReady && (
+            <WordDisplay word={word} guessedLetters={guessedLetters} />
+          )}
 
-        {gameReady && (
-          <p>
-            {text.wrongGuesses}: {wrongGuesses} / {MAX_WRONG_GUESSES}
-          </p>
-        )}
+          {gameReady && (
+            <p>
+              {text.wrongGuesses}: {wrongGuesses} / {MAX_WRONG_GUESSES}
+            </p>
+          )}
+
+          {gameReady && (
+            <p>🎁 {text.streak}: {streak}</p>
+          )}
+
+        </div>
 
         {gameReady && (
           <Keyboard
@@ -109,16 +145,24 @@ const Home = ({ language }: HomeProps) => {
           />
         )}
 
-        {gameReady && (
-          <IonButton onClick={startGame}>
-            {gameOver ? text.playAgain : text.startOver}
+        {gameOver && (
+          <IonButton
+            className='restart-button'
+            onClick={startGame}
+          >
+            {text.playAgain}
           </IonButton>
         )}
 
-        {hasWon && <p> {text.win} </p>}
-        {hasLost && <p> {text.lose}: {word} </p>}
+        {gameOver && (
+          <div className='game-content2'>
+            {hasWon && <p> {text.win} </p>}
+            {hasLost && <p> {text.lose}: {word} </p>}
+          </div>
+        )}
 
       </IonContent>
+
       <InstructionsModal
         isOpen={showInstructions}
         onClose={() => setShowInstructions(false)}
@@ -128,4 +172,4 @@ const Home = ({ language }: HomeProps) => {
   );
 };
 
-export default Home;
+export default Game;

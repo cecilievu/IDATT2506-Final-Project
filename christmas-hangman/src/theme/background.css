@@ -19,18 +19,52 @@
     --ion-font-family: 'Quicksand', sans-serif;
 }
 
-h1, h2, ion-title {
+h1,
+h2,
+ion-title {
     font-family: 'Fredoka', sans-serif;
 }
 
 /* felles bakgrunn for alle sider */
 ion-content {
-    --background: 
-    linear-gradient(
-        rgba(255, 255, 255, 0.5),
-        rgba(255, 255, 255, 0.5)
-    ),
-    url('/images/background.png')
-    center / cover no-repeat;
+    --background:
+        linear-gradient(rgba(255, 255, 255, 0.5),
+            rgba(255, 255, 255, 0.5)),
+        url('/images/background.png') center / cover no-repeat;
 }
 
+/* knappefarger */
+ion-button {
+    --background: #ffb5c0;
+    --color: black;
+    --border-color: #6e3c19;
+    --border-width: 2px;
+    --border-style: dotted;
+
+    /* farge når knappen trykkes */
+    --background-activated: #9f485992;
+    --background-focused: #b77b7b;
+    --ripple-color: #f5d6d6;
+
+}
+
+ion-button[fill="outline"] {
+    --background: #ffb5c056;
+    --color: black;
+    --border-color: #8b3a4a;
+}
+
+/* knappene i header */
+ion-button.header-button {
+    --background: transparent;
+    --background-activated: transparent;
+    --background-focused: transparent;
+
+    --color: #8e2c40;
+
+    --border-width: 0;
+    --border-style: none;
+
+    --box-shadow: none;
+    --ripple-color: rgba(139, 58, 74, 0.2);
+}

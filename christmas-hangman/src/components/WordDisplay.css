@@ -1,0 +1,5 @@
+/* gjør bokstavene til _ _ _ større */
+.word-display {
+    font-size: clamp(23px, 5vw, 31px);
+    letter-spacing: 3px;
+}

@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import Game from './pages/Game';
 import StartPage from './pages/StartPage';
+import words from './data/words.json'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -43,30 +44,68 @@ setupIonicReact();
 const App: React.FC = () => {
   const [language, setLanguage] = useState<'en' | 'no'>('en');
   const [hasSeenInstructions, setHasSeenInstructions] = useState(false);
+  const [word, setWord] = useState('');
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
+  const [wrongGuesses, setWrongGuesses] = useState(0);
+
+  const [streak, setStreak] = useState(0);
+
+  const startNewGame = () => {
+    const wordList = words[language];
+    const randomWord = wordList[
+      Math.floor(Math.random() * wordList.length)
+    ].toUpperCase();
+
+    setWord(randomWord);
+    setGuessedLetters([]);
+    setWrongGuesses(0);
+    setStreak(0);
+  };
+
+  const changeLanguage = (newLanguage: 'en' | 'no') => {
+    setLanguage(newLanguage);
+    setWord('');
+    setGuessedLetters([]);
+    setWrongGuesses(0);
+    setStreak(0);
+  }
 
   return (
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
           <Route
-            path ="/"
-            element = {
+            path="/"
+            element={
               <StartPage
-              language={language}
-              setLanguage={setLanguage}
-              hasSeenInstructions={hasSeenInstructions}
-              setHasSeenInstructions={setHasSeenInstructions}
+                language={language}
+                setLanguage={changeLanguage}
+                hasSeenInstructions={hasSeenInstructions}
+                setHasSeenInstructions={setHasSeenInstructions}
+                word={word}
+                streak={streak}
+                startNewGame={startNewGame}
               />
             }
           />
 
           <Route
-          path="/game"
-          element={<Game language={language} />}
-        />
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
+            path="/game"
+            element={<Game
+              language={language}
+              word={word}
+              setWord={setWord}
+              guessedLetters={guessedLetters}
+              setGuessedLetters={setGuessedLetters}
+              wrongGuesses={wrongGuesses}
+              setWrongGuesses={setWrongGuesses}
+              streak={streak}
+              setStreak={setStreak}
+            />}
+          />
+        </IonRouterOutlet>
+      </IonReactRouter>
+    </IonApp>
   );
 };
 
