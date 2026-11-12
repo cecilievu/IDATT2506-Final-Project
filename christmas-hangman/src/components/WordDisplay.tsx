@@ -10,7 +10,7 @@ const WordDisplay = ({ word, guessedLetters }: WordDisplayProps) => {
     <div className="word-display"> 
       {word.split('').map((letter, index) => (
         <span key={index} className="letter">
-          {guessedLetters.includes(letter) ? letter : '_'}
+          {letter === ' ' ? '\u00A0' : guessedLetters.includes(letter) ? letter : '_'}
         </span>
       ))}
     </div>

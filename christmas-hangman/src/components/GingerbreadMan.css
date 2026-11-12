@@ -1,0 +1,67 @@
+.gingerbread-man {
+    position: relative;
+    width: 280px;
+    height: 200px;
+    margin: 20px auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gingerbread-man img {
+    width: 110px;
+    height: auto;
+    position: relative;
+    top: 5px;
+    z-index: 1;
+}
+
+.vertical-line {
+    position: absolute;
+    width: 5px;
+    height: 180px;
+    background-color: #6e3c19;
+    left: 42px;
+    bottom: 25px;
+}
+
+.horizontal-line {
+    position: absolute;
+    width: 100px;
+    height: 5px;
+    background-color: #6e3c19;
+    left: 42px;
+    top: -5px;
+}
+
+.diagonal-line {
+    position: absolute;
+    width: 55px;
+    height: 4px;
+    background-color: #6e3c19;
+    left: 36px;
+    top: 15px;
+    transform: rotate(-45deg);
+}
+
+.half-circle {
+    position: absolute;
+    width: 70px;
+    height: 10px;
+    border: 5px solid #6e3c19;
+    border-top: none;
+    border-radius: 10% 10% 60% 60%;
+    left: 105px;
+    top: 118px;
+    z-index: 2;
+}
+
+.final-line {
+    position: absolute;
+    width: 5px;
+    height: 40px;
+    background-color: #6e3c19;
+    left: 137px;
+    bottom: 165px;
+}

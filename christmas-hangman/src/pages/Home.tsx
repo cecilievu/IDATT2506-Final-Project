@@ -1,36 +1,37 @@
 import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Home.css';
 
 import Keyboard from '../components/Keyboard';
 import WordDisplay from '../components/WordDisplay';
 import GingerbreadMan from '../components/GingerbreadMan';
+import words from '../data/words.json';
 
-const words = [
-  'SNOW',
-  'SANTA',
-  'REINDEER',
-  'PRESENT',
-  'CHRISTMAS',
-  'COOKIE'
-];
+interface HomeProps {
+  language: 'en' | 'no'
+}
 
 const MAX_WRONG_GUESSES = 6;
 
-const Home: React.FC = () => {
+const Home = ({language}: HomeProps) => {
 
-  const [gameStarted, setGameStarted] = useState(false);
   const [word, setWord] = useState('');
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
   const [wrongGuesses, setWrongGuesses] = useState(0);
+  const gameReady = word !== '';
+
+  const wordList = words[language];
 
   const startGame = () => {
-    const randomWord = words[Math.floor(Math.random() * words.length)];
+    const randomWord = wordList[Math.floor(Math.random() * wordList.length)].toUpperCase();
     setWord(randomWord);
-    setGameStarted(true);
     setGuessedLetters([]);
     setWrongGuesses(0);
-  }
+  };
+
+  useEffect(() => {
+    startGame();
+  }, [language]);
 
   const guessLetter = (letter: string) => {
     if (gameOver ||guessedLetters.includes(letter)) {
@@ -43,13 +44,9 @@ const Home: React.FC = () => {
     }
   };
 
-  const hasWon = word.length > 0 && word.split('').every(letter => guessedLetters.includes(letter));
+  const hasWon = word.length > 0 && word.split('').every(letter => letter === ' ' || guessedLetters.includes(letter));
   const hasLost = wrongGuesses >= MAX_WRONG_GUESSES;
   const gameOver = hasWon || hasLost;
-
-  const isHappy = hasWon || wrongGuesses === 0;
-  const isShocked = !hasWon && wrongGuesses > 0 && !hasLost;
-  const isSad = hasLost;
 
 
   return (
@@ -61,39 +58,47 @@ const Home: React.FC = () => {
       </IonHeader>
 
       <IonContent className="ion-padding">
-        <h1> Christmas Hangman </h1>
-        <p> Get ready for a festive game of Hangman! </p>
 
-        <IonButton onClick={startGame}>
-          Start Game
+        <IonButton routerLink="/" fill="outline">
+        BACK
         </IonButton>
-        {gameStarted && (
+
+        <h1> Christmas Hangman </h1>
+
+        {gameReady && (
           <GingerbreadMan 
             wrongGuesses={wrongGuesses} 
             hasWon={hasWon} 
           />
         )}
         
-        {gameStarted && (
+        {gameReady && (
           <WordDisplay word={word} guessedLetters={guessedLetters} />
         )}
 
-        {gameStarted &&(
+        {gameReady &&(
           <p> 
             Wrong guesses: {wrongGuesses} / {MAX_WRONG_GUESSES} 
           </p>
         )}
 
-        {gameStarted && (
+        {gameReady && (
           <Keyboard 
           onGuess={guessLetter} 
           guessedLetters={guessedLetters}
           gameOver={gameOver}
+          language={language}
          />
         )}
 
         {hasWon && <p> Congratulations! You've guessed the word! :) </p>}
         {hasLost && <p> Game over :( The word was: {word} </p>}
+
+        {gameOver && (
+          <IonButton onClick={startGame}>
+            Play again
+          </IonButton>
+        )}
 
       </IonContent>
     </IonPage>

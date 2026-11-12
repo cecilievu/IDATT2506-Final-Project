@@ -4,14 +4,19 @@ interface KeyboardProps {
   onGuess: (letter: string) => void;
   guessedLetters: string[];
   gameOver: boolean;
+  language: 'en' | 'no';
 }
 
-const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const englishLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const norwegianLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ'.split('');
 
-const Keyboard = ({ onGuess, guessedLetters, gameOver }: KeyboardProps) => {
+const Keyboard = ({ onGuess, guessedLetters, gameOver, language }: KeyboardProps) => {
+  
+  const letters = language === 'no' ? norwegianLetters : englishLetters;
+
   return (
     <div className="keyboard">
-      {alphabet.map(letter => (
+      {letters.map(letter => (
         <IonButton
           key={letter}
           onClick={() => onGuess(letter)}
