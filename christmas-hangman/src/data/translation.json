@@ -18,9 +18,9 @@
         "cancel": "Cancel",
         "languageChangeTitle": "Change language?",
         "languageChangeWarning": "Changing language will reset your win streak",
-        "confirm": "Star new game",
+        "confirm": "Start new game",
         "instructions": "How to play",
-        "instructionsText": "Guess the hidden Christmas word, one letter at a time. Be careful not to make many wrong guesses or the gingerbread man won't survive!",
+        "instructionsText": "Guess the hidden Christmas word, one letter at a time. If you make too many wrong guesses the gingerbread man won't survive!",
         "close": "Got it!"
     },
     "no": {
