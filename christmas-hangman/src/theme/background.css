@@ -67,4 +67,9 @@ ion-button.header-button {
 
     --box-shadow: none;
     --ripple-color: rgba(139, 58, 74, 0.2);
+    font-size: 17px;
+}
+
+ion-button.header-button ion-icon {
+    font-size: 26px;
 }

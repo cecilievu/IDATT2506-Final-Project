@@ -1,4 +1,5 @@
-import { IonModal, IonHeader,IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/react';
+import { IonModal, IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/react';
+import './InstructionsModal.css'
 
 import translation from '../data/translation.json';
 
@@ -13,7 +14,10 @@ const InstructionsModal = ({ isOpen, onClose, language }: InstructionsModalProps
     const text = translation[language];
 
     return (
-        <IonModal isOpen={isOpen} onDidDismiss={onClose}>
+        <IonModal
+            className="instructions-modal"
+            isOpen={isOpen}
+            onDidDismiss={onClose}>
             <IonHeader>
                 <IonToolbar>
                     <IonTitle> {text.instructions} </IonTitle>
@@ -21,9 +25,14 @@ const InstructionsModal = ({ isOpen, onClose, language }: InstructionsModalProps
             </IonHeader>
 
             <IonContent className="ion-padding">
-                <p> {text.instructionsText} </p>
+                <p className="instructions-text">
+                    {text.instructionsText}
+                </p>
 
-                <IonButton expand="block" onClick={onClose}>
+                <IonButton
+                    className="got-it-button"
+                    expand="block"
+                    onClick={onClose}>
                     {text.close}
                 </IonButton>
             </IonContent>

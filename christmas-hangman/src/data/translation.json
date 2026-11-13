@@ -20,7 +20,7 @@
         "languageChangeWarning": "Changing language will reset your win streak",
         "confirm": "Star new game",
         "instructions": "How to play",
-        "instructionsText": "Guess the hidden Christmas word, one letter at a time.",
+        "instructionsText": "Guess the hidden Christmas word, one letter at a time. Be careful not to make many wrong guesses or the gingerbread man won't survive!",
         "close": "Got it!"
     },
     "no": {
@@ -44,7 +44,7 @@
         "languageChangeWarning": "Bytter du språk mister du seiersrekka di",
         "confirm": "Start nytt spill",
         "instructions": "Slik spiller du",
-        "instructionsText": "Gjett det skjulte juleordet, en bokstav om gangen.",
+        "instructionsText": "Gjett det skjulte juleordet, en bokstav om gangen. Pass på å ikke gjette feil for mange ganger slik at du kan redde pepperkakemannen!",
         "close": "Skjønner!"
     }
 }

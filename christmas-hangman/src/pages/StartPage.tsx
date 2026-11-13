@@ -123,7 +123,7 @@ const StartPage = ({
               </IonButton>
 
               <IonButton
-                fill="outline"
+                fill="solid"
                 onClick={() => setShowNewGameAlert(true)}
               >
                 {text.newGame}

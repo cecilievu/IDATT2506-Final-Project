@@ -1,0 +1,28 @@
+/* lage en pop-up stil for info */
+ion-modal.instructions-modal {
+  --width: 85%;
+  --max-width: 350px;
+  --height: auto;
+  --border-radius: 5px;
+  --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+ion-modal.instructions-modal::part(content) {
+  position: relative;
+  max-height: 80vh;
+}
+
+ion-modal.instructions-modal ion-content {
+  --background: #ffffff;
+}
+
+/* luft mellom linjene */
+.instructions-text {
+    line-height: 1.5;
+}
+
+/* got it knappen */
+ion-button.got-it-button {
+    width: 120px;
+    margin: 30px 10px 16px auto;
+}
